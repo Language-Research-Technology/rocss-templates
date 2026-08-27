@@ -1032,7 +1032,13 @@ body.map-main-active .main-map-view {
 .tabular-filters {
   margin-bottom: 1em;
   min-width: 15rem;
-  flex: 0;
+  flex: 0 0 15rem;
+  align-self: flex-start;
+  position: sticky;
+  top: 12px;
+  max-height: calc(100vh - 24px);
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .tabular-filter-reset {
