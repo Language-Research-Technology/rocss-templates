@@ -47,6 +47,13 @@
     ],
     "http://schema.org/MediaObject": [
       {
+        "uri": "http://schema.org/isPartOf",
+        "label": "In series",
+        "addFacet": true,
+        "facetLabel": "series",
+        "hideInTable": true
+      },
+      {
         "uri": "http://schema.org/name",
         "label": "Item",
         "columnWidth": "large"
@@ -78,13 +85,6 @@
         "label": "Researcher",
         "addFacet": true,
         "facetLabel": "researcher",
-        "hideInTable": true
-      },
-      {
-        "uri": "http://schema.org/isPartOf",
-        "label": "In series",
-        "addFacet": true,
-        "facetLabel": "series",
         "hideInTable": true
       },
       {
