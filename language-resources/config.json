@@ -57,7 +57,7 @@
         "columnWidth": "large"
       },
       {
-        "uri": "http://purl.org/dc/terms#format",
+        "uri": "http://purl.org/dc/terms/format",
         "label": "Format",
         "addFacet": true,
         "facetLabel": "format",
@@ -74,6 +74,13 @@
         "label": "Person in",
         "addFacet": true,
         "facetLabel": "person mentioned"
+      },
+      {
+        "uri": "https://w3id.org/ldac/terms#researcher",
+        "label": "Researcher",
+        "addFacet": true,
+        "facetLabel": "researcher",
+        "hideInTable": true
       },
       {
         "uri": "http://schema.org/isPartOf",
@@ -220,6 +227,12 @@
       "defaultLabel": "memberOf",
       "customLabel": "Member of",
       "customReverseLabel": "Has member",
+      "hide": false
+    },
+    "http://purl.org/dc/terms/format": {
+      "defaultLabel": "format",
+      "customLabel": "Format",
+      "customReverseLabel": "",
       "hide": false
     },
     "http://purl.org/dc/terms/conformsTo": {
@@ -454,6 +467,12 @@
       "defaultLabel": "hasCollectionProtocol",
       "customLabel": "Has Collection Protocol",
       "customReverseLabel": "Collection Protocol Of",
+      "hide": false
+    },
+    "https://w3id.org/ldac/terms#researcher": {
+      "defaultLabel": "researcher",
+      "customLabel": "Researcher",
+      "customReverseLabel": "Researcher For",
       "hide": false
     },
    

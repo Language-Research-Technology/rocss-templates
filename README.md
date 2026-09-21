@@ -87,7 +87,7 @@ Example (`MediaObject` table):
 
 ```json
 {
-	"uri": "http://purl.org/dc/terms#format",
+	"uri": "http://purl.org/dc/terms/format",
 	"label": "Format",
 	"addFacet": true,
 	"facetLabel": "format",
