@@ -1428,8 +1428,21 @@
     
           <tbody>
             {%- for row in typeData.rows %}
+            {#- The Item column shows schema.org/title when the entity has one and
+                falls back to its name, so a file called "115D#J~Y.PDF" can present
+                itself as what it actually is. ro-crate resolves a bare "title"
+                against @vocab to the http:// form, which is the normal case; the
+                https:// key is a fallback for a crate that spells the URI out. -#}
+            {%- set rowEntity = data.ids[row.id] if row.id else none %}
+            {%- set titleProp = (rowEntity.props["http://schema.org/title"] or rowEntity.props["https://schema.org/title"]) if rowEntity and rowEntity.props else none %}
+            {%- set titleText = titleProp.fwd[0].value if titleProp and titleProp.fwd and titleProp.fwd | length else none %}
+            {#- Keywords go into the row's search text explicitly rather than relying on
+                the Keywords column's own cell text, so Find… still matches them if the
+                column is ever hidden. Multi-valued, hence the join. -#}
+            {%- set keywordsProp = (rowEntity.props["http://schema.org/keywords"] or rowEntity.props["https://schema.org/keywords"]) if rowEntity and rowEntity.props else none %}
+            {%- set keywordsText = keywordsProp.fwd | join(' ', 'value') if keywordsProp and keywordsProp.fwd else none %}
             <tr
-              data-full-text="{{ (row.displayName | default(row.id, true)) | lower }} {{ row.cellSearchTexts | join(' ') | lower }}"
+              data-full-text="{{ (row.displayName | default(row.id, true)) | lower }} {{ titleText | default('', true) | lower }} {{ keywordsText | default('', true) | lower }} {{ row.cellSearchTexts | join(' ') | lower }}"
               {%- if row.filterTexts %}
               {%- for filterGroup in typeData.filters %} data-filter-{{ filterGroup.key }}="{{ row.filterTexts[filterGroup.key] if row.filterTexts[filterGroup.key] else '||' }}"{%- endfor %}
               {%- endif %}
@@ -1437,8 +1450,20 @@
               }}="{{ row.cellSearchTexts[i] | default('', true) | lower }}" {%- endfor %}>
     
               {%- for cell in row.cells %}
+              {%- set isNameColumn = typeData.columns[loop.index0].uri == nameUri %}
+              {#- Only the cell's text changes: the replacement mirrors whatever linking
+                  mode the original cell had, so a title never alters where the Item
+                  column points — overlay anchor, multipage page, or plain text. -#}
+              {%- set displayCell = cell %}
+              {%- if isNameColumn and titleText %}
+              {%- if cell is mapping and cell.target_id %}
+              {%- set displayCell = { "target_id": cell.target_id, "text": titleText, "isReverse": cell.isReverse } %}
+              {%- else %}
+              {%- set displayCell = { "text": titleText } %}
+              {%- endif %}
+              {%- endif %}
               <td>
-                {{- renderTableCell(cell, typeData.columns[loop.index0].uri == nameUri, row) -}}
+                {{- renderTableCell(displayCell, isNameColumn, row) -}}
               </td>
               {%- endfor %}
             </tr>

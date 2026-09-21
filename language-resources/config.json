@@ -70,10 +70,8 @@
         "facetLabel": "author"
       },
       {
-        "uri": "arcp://name,custom/terms#contentPerson",
-        "label": "Person in",
-        "addFacet": true,
-        "facetLabel": "person mentioned"
+        "uri": "http://schema.org/keywords",
+        "label": "Keywords"
       },
       {
         "uri": "https://w3id.org/ldac/terms#researcher",
@@ -385,6 +383,12 @@
       "customReverseLabel": "",
       "hide": false
     },
+    "http://schema.org/title": {
+      "defaultLabel": "title",
+      "customLabel": "Title",
+      "customReverseLabel": "",
+      "hide": false
+    },
     "http://schema.org/MediaObject": {
       "defaultLabel": "MediaObject",
       "customLabel": "Item",
@@ -509,6 +513,7 @@
         "@id",
         "@type",
         "http://purl.org/dc/terms/conformsTo",
+        "http://schema.org/title",
         "http://schema.org/name",
         "http://schema.org/description",
         "http://schema.org/additionalType",
