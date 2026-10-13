@@ -460,6 +460,21 @@
         ids: {{ data.ids | dump | safe }}
       };
 
+      // OSM's tile servers block requests without a Referer, which is what a
+      // page opened from disk (file://) sends, so fall back to Esri there.
+      function createTileLayer() {
+        if (window.location.protocol === "file:") {
+          return L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", {
+            maxZoom: 19,
+            attribution: "Tiles &copy; Esri &mdash; Source: Esri, HERE, Garmin, USGS and others"
+          });
+        }
+        return L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: "&copy; OpenStreetMap contributors"
+        });
+      }
+
       var footerMap = null;
       var footerMapPoints = null;
       var footerMapMarkerLayer = null;
@@ -717,10 +732,7 @@
             minZoom: 2
           });
 
-          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            maxZoom: 19,
-            attribution: "&copy; OpenStreetMap contributors"
-          }).addTo(footerMap);
+          createTileLayer().addTo(footerMap);
         }
 
         if (!footerMapPoints.length) {
@@ -806,10 +818,7 @@
             scrollWheelZoom: false
           });
 
-          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            maxZoom: 19,
-            attribution: "&copy; OpenStreetMap contributors"
-          }).addTo(map);
+          createTileLayer().addTo(map);
 
           var group = L.featureGroup();
           points.forEach(function (point) {
