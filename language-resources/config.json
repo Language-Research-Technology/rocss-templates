@@ -72,9 +72,9 @@
       },
       {
         "uri": "arcp://name,custom/terms#participant",
-        "label": "Author",
+        "label": "Mentions",
         "addFacet": true,
-        "facetLabel": "author"
+        "facetLabel": "mentions"
       },
       {
         "uri": "http://schema.org/keywords",
