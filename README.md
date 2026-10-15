@@ -43,6 +43,19 @@ Document page), instead of a single template handling every page. See
 `structured-docs/` for a working example, ported from a project-specific
 multipage site originally built directly against an RO-Crate.
 
+### Images
+
+If your collection has images in multiple fields which you want to display in the same gallery, you can list them in `config.json`'s `images` array.
+
+```
+{
+  "images": [
+    "image",
+    "custom:habitatImage"
+  ]
+}
+```
+
 ## Per-site keys
 
 Two `config.json` keys hold values that only really make sense for one
