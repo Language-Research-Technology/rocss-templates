@@ -104,6 +104,9 @@
             box-shadow: 4px 4px 6px rgba(0,0,0,0.2);
         }
         .image-grid {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
             column-count: 3;
             column-gap: 1em;
         }
@@ -118,6 +121,9 @@
         }
         .image-grid > :only-child {
             column-span: all;
+        }
+        .image-grid > :only-child img {
+            margin: 0 auto;
         }
         @media (max-width: 900px) {
             .image-grid {
@@ -176,6 +182,8 @@
         }
         .right {
             min-width: 0;
+            width: 100%;
+            box-sizing: border-box;
             margin: 1em 0;
         }
         .property-grid > .grid:not(.feature-image) .right {
@@ -203,8 +211,7 @@
             margin: 1em 0;
         }
         img {
-            max-width:500px;
-            max-height:500px;
+            max-width:400px;
             width: 25%;
             height: auto;
         }
